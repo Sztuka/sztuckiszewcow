@@ -436,20 +436,8 @@ h2 {
   );
 }
 
-.footer-logo {
-  max-width: 160px; /* Adjust as needed */
-  display: block;
-  border-radius: 50%;
-  outline: 4px solid #fff;
-  padding: 8px;
-}
-
 .contact-info p {
   margin-bottom: 0.5rem; /* Adjust spacing between address and phone/email */
-}
-
-.footer-content {
-  gap: 2rem;
 }
 
 .contact-info a {
@@ -979,6 +967,9 @@ h2 {
 }
 
 /* Contact Section */
+.contact-section {
+  padding: 0;
+}
 
 .contact-section img {
   opacity: 0.8;
@@ -1036,13 +1027,28 @@ h2 {
 }
 
 .social-icons ul li a {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  text-decoration: none;
   color: var(--color-dark);
-  transition: color 0.3s ease;
+  font-weight: 800;
+  position: relative;
 }
 
-.social-icons ul li a:hover {
-  color: var(--color-green);
+.social-icons ul li a::before {
+  content: "";
+  display: block;
+  height: 24px;
+  background-color: var(--color-green);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+.social-icons ul li a:hover::before {
+  width: 100%;
 }
 
 .vr-me {
@@ -1052,6 +1058,21 @@ h2 {
 
 @media (max-width: 767px) {
   .vr-me {
-    justify-content: flex-start;
+    justify-content: center;
+    padding: 0;
   }
+  .contact-block {
+    padding: 0;
+  }
+}
+
+.footer {
+  width: 100%;
+}
+
+.footer-copyright {
+  background: var(--color-light);
+  padding: 16px;
+  text-align: center;
+  font-size: 1rem;
 }
