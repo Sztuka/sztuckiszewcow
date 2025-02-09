@@ -1,7 +1,7 @@
 <?php
 get_header();
 
-// Pobierz dane kontaktowe (w Customizerze, bo to nadal ustawienia witryny)
+// Pobierz dane kontaktowe (z Customizera)
 $email = get_theme_mod('contact_email');
 
 // Pobierz dane projektu zapisane w meta (z meta boxów)
@@ -30,30 +30,37 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
 
 <!-- Project Detail Start -->
 <div class="container mb-5 py-5 project-block">
-  <div class="row gx-5">
+  <div class="row gx-3 d-flex align-items-stretch mb-5">
     <!-- Kolumna z kartami -->
     <div class="col-12 col-md-4 mb-4">
-      <div class="details-card mb-4">
+      <div class="details-card h-100">
         <div>
           <h4>Overview</h4>
           <p><?php echo $overview; ?></p>
         </div>
       </div>
-      <div class="details-card mb-4">
+    </div>
+    <div class="col-12 col-md-4 mb-4">
+      <div class="details-card h-100">
         <div>
           <h4>Challenge</h4>
           <p><?php echo $challenge; ?></p>
         </div>
       </div>
-      <div class="details-card mb-4">
+    </div>
+    <div class="col-12 col-md-4 mb-4">
+      <div class="details-card h-100">
         <div>
-          <h4>Impact & Results</h4>
+          <h4>Impact &amp; Results</h4>
           <p><?php echo $impact; ?></p>
         </div>
       </div>
     </div>
-
-    <!-- Kolumna z treścią -->
+    <!-- Koniec wiersza z kartami -->
+  </div>
+  
+  <!-- Kolumna z treścią -->
+  <div class="row">
     <div class="col-12 col-md-8">
       <div class="content">
         <?php the_content(); ?>
@@ -61,5 +68,6 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
     </div>
   </div>
 </div>
+
 
 <?php get_footer(); ?>
