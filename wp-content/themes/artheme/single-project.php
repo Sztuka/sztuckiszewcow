@@ -15,7 +15,9 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
   <div class="row">
     <div class="col-md-12 parallax-image" style="background-image: url('<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ); ?>');"></div>
     <div class="overlay-text">
-      <h1><?php the_title(); ?></h1>
+      <div class="project-title">
+        <h1><?php the_title(); ?></h1>
+      </div>
       <div class="btn-holder mb-5">
         <?php if ( $email ) : ?>
           <a href="mailto:<?php echo esc_attr( $email ); ?>" class="btn btn-dark-3 dark-hover-border-2">
@@ -32,7 +34,7 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
 <div class="container mb-5 py-5 project-block">
   <div class="row gx-3 d-flex align-items-stretch mb-5">
     <!-- Kolumna z kartami -->
-    <div class="col-12 col-md-4 mb-4">
+    <div class="col-12 col-lg-4">
       <div class="details-card h-100">
         <div>
           <h4>Overview</h4>
@@ -40,7 +42,7 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-4 mb-4">
+    <div class="col-12 col-lg-4">
       <div class="details-card h-100">
         <div>
           <h4>Challenge</h4>
@@ -48,7 +50,7 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-4 mb-4">
+    <div class="col-12 col-lg-4">
       <div class="details-card h-100">
         <div>
           <h4>Impact &amp; Results</h4>
@@ -61,7 +63,7 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
   
   <!-- Kolumna z treścią -->
   <div class="row">
-    <div class="col-12 col-md-8">
+    <div class="col-12">
       <div class="content">
         <?php the_content(); ?>
       </div>
