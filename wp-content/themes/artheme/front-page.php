@@ -2,7 +2,13 @@
 
 get_header();
 
-$contact_email = get_field('contact_email');
+$email     = get_theme_mod('contact_email');
+$phone     = get_theme_mod('contact_phone');
+$whatsapp  = get_theme_mod('contact_whatsapp');
+$messenger = get_theme_mod('contact_messenger');
+$linkedin  = get_theme_mod('contact_linkedin');
+$instagram = get_theme_mod('contact_instagram');
+
 ?>
 
 
@@ -11,12 +17,13 @@ $contact_email = get_field('contact_email');
         <div class="col-md-12 parallax-image" style="background-image: url('<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>');"></div>
         <div class="overlay-text">
           <?php the_content(); ?>
-                <div class='btn-holder mb-5'>
-                  <a href="mailto:<?php echo esc_attr($contact_email); ?>" class="btn btn-dark-3 dark-hover-border-2">
-                    <span>Contact Me
-                    </span> 
-                  </a>
-                </div>
+              <div class="btn-holder mb-5">
+        <?php if ( $email ) : ?>
+          <a href="mailto:<?php echo esc_attr( $email ); ?>" class="btn btn-dark-3 dark-hover-border-2">
+            <span>Contact Me</span>
+          </a>
+        <?php endif; ?>
+      </div>
             </div>
         
     </div>
@@ -211,7 +218,7 @@ if ($about_page):
                   <p><?php the_content(); ?></p>
                 </div>
                 <div class='btn-holder'>
-                  <a href="mailto:<?php echo esc_attr($contact_email); ?>" class="btn btn-dark-3 dark-hover-border-2">
+                  <a href="mailto:peter@sztuckiszewcow.com" class="btn btn-dark-3 dark-hover-border-2">
                     <span>Contact Me</span>
                   </a>
                 </div>

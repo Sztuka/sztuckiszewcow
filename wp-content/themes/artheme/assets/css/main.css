@@ -974,19 +974,17 @@ h2 {
 .contact-section img {
   opacity: 0.8;
   scale: 0.5;
-  filter: grayscale(100%);
-  animation: fade-in ease-out forwards;
+  animation: contact-in ease-out forwards;
   animation-timeline: view();
-  animation-range: 250px 800px;
+  animation-range: 20px 320px;
   margin-bottom: 48px;
   max-height: 320px;
 }
 
-@keyframes fade-in {
+@keyframes contact-in {
   to {
     scale: 1;
     opacity: 1;
-    filter: grayscale(0%);
   }
 }
 
