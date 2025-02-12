@@ -10,8 +10,6 @@ function artzy_features() {
     add_theme_support('title-tag');
     // Rejestracja menu
     register_nav_menu('header-menu', __('Header Menu', 'ArTheme'));
-    register_nav_menu('footerLocationOne', __('Footer Location One', 'ArTheme'));
-    register_nav_menu('footerLocationTwo', __('Footer Location Two', 'ArTheme'));
     // Rejestracja menu Social – dla ikon społecznościowych
     register_nav_menu('social-menu', __('Social Menu', 'ArTheme'));
 }

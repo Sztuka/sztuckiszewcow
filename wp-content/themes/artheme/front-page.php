@@ -11,26 +11,24 @@ $instagram = get_theme_mod('contact_instagram');
 
 ?>
 
-
 <div id="home" class="container-fluid page-banner">
-    <div class="row">
-        <div class="col-md-12 parallax-image" style="background-image: url('<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>');"></div>
-        <div class="overlay-text">
+  <div class="row">
+    <div class="col-md-12 parallax-image" style="background-image: url('<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>');"></div>
+    <div class="overlay-text">
           <?php the_content(); ?>
-              <div class="btn-holder mb-5">
+      <div class="btn-holder mb-5">
         <?php if ( $email ) : ?>
           <a href="mailto:<?php echo esc_attr( $email ); ?>" class="btn btn-dark-3 dark-hover-border-2">
             <span>Contact Me</span>
           </a>
         <?php endif; ?>
       </div>
-            </div>
-        
-    </div>
+    </div>  
+  </div>
 </div>
 
 
-<div class="scroller">
+<div class="scroller section-space">
     <ul class="tag-list scroller_inner">
       <?php
       $args = array(
@@ -75,7 +73,7 @@ if ($about_page):
     $about_title = $about_page->post_title; // Tytuł strony
     $about_content = apply_filters('the_content', $about_page->post_content); // Treść strony
 ?>
-<div id="about me" class="about-section container mb-5 py-5">
+<div id="about-me" class="about-section container section-space py-5">
   <div class="row align-items-center">
     <div class="col-md-6">
       <?php if ($about_image): ?>
@@ -83,11 +81,11 @@ if ($about_page):
       <?php endif; ?>
     </div>
     <div class="col-md-6">
-      <h3><?php echo esc_html($about_title); ?></h3>
+      <h2><?php echo esc_html($about_title); ?></h2>
       <div class="about-card">
         <div class="about-content">
           <div class="experience-label">
-            <h4><span data-count="11">0</span></h4><p>years of experience</p>
+            <h3><span data-count="11">0</span></h3><p>years of experience</p>
           </div>
           <p><?php echo $about_content; ?></p>
         </div>
@@ -100,8 +98,8 @@ if ($about_page):
 
 
 <!-- Portfolio Section -->
-<div id="portfolio" class="container mb-5 py-5">
-  <h3>Portfolio</h3>  
+<div id="portfolio" class="container section-space py-5">
+  <h2>Portfolio</h2>  
   <!-- Portfolio Grid -->
   <div class="portfolio-section mb-5">
     <?php
@@ -133,7 +131,7 @@ if ($about_page):
 
           <!-- Etykieta projektu -->
           <div class="project-label">
-            <h4><?php the_title(); ?></h4>
+            <h3><?php the_title(); ?></h3>
             <p><?php echo strip_tags( get_the_category_list(', ') ); ?></p>
           </div>
         </div>
@@ -157,10 +155,10 @@ if ($about_page):
 </div>
 
 <!-- Testimonials Section -->
-<div id="testimonials" class="container-fluid testimonials-section mb-5">
+<div id="testimonials" class="container-fluid testimonials-section section-space">
   <div class="container relative-testimonial py-5">
-    <h3>Testimonials</h3>
-    <h4>Here's what my clients and coworkers had to say about me</h4>
+    <h2>Testimonials</h2>
+    <h3>Here's what my clients and coworkers had to say about me</h3>
     <div class="testimonial-block">
       <?php
         // Zapytanie pobierające wszystkie posty typu 'quote'
@@ -188,7 +186,7 @@ if ($about_page):
       ?>
     </div>
     
-    <!-- Obraz dekoracyjny – pobierany z Customizera -->
+    <!-- Obraz dekoracyjny -->
     <div 
         class="testimonials-me" 
         style="background-image: url('<?php echo esc_url( get_theme_mod( 'testimonial_image' ) ); ?>');">
@@ -199,8 +197,8 @@ if ($about_page):
 
 
 <!-- Services Section -->
-<div id="services" class="container mb-5 py-5">
-  <h3>Services</h3>
+<div id="services" class="container section-space py-5">
+  <h2>Services</h2>
   <div class="row mb-5 services-block" style="background-image: url('<?php echo esc_url( get_theme_mod( 'services_image' ) ); ?>');">
     <?php
     $services_query = new WP_Query(array(
@@ -214,11 +212,11 @@ if ($about_page):
             ?>
             <div class="service-card">
                 <div class="owner-bio">
-                  <h4><?php the_title(); ?></h4>
+                  <h3><?php the_title(); ?></h3>
                   <p><?php the_content(); ?></p>
                 </div>
                 <div class='btn-holder'>
-                  <a href="mailto:peter@sztuckiszewcow.com" class="btn btn-dark-3 dark-hover-border-2">
+                  <a href="mailto:<?php echo esc_attr( $email ); ?>" class="btn btn-dark-3 dark-hover-border-2">
                     <span>Contact Me</span>
                   </a>
                 </div>

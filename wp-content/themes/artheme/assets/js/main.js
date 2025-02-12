@@ -180,3 +180,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
   setInterval(showNextTestimonial, intervalTime);
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Funkcja opakowująca element figure z embedem w link
+  function wrapEmbedWithLink(selector, linkClass) {
+    var embedFigures = document.querySelectorAll(selector);
+    embedFigures.forEach(function (figure) {
+      var iframe = figure.querySelector("iframe");
+      if (!iframe) return;
+
+      // Pobieramy URL z atrybutu src iframe
+      var videoUrl = iframe.src;
+
+      // Dodajemy parametr autoplay=1 (możesz dostosować według potrzeb)
+      if (videoUrl.indexOf("?") !== -1) {
+        videoUrl += "&autoplay=1";
+      } else {
+        videoUrl += "?autoplay=1";
+      }
+
+      // Sprawdzamy, czy figure nie jest już opakowane
+      if (figure.parentNode.tagName.toLowerCase() !== "a") {
+        var link = document.createElement("a");
+        link.href = videoUrl;
+        link.classList.add(linkClass);
+        // Wstaw link przed figure i przenieś figure do linka
+        figure.parentNode.insertBefore(link, figure);
+        link.appendChild(figure);
+      }
+    });
+  }
+
+  // Opakowujemy embedy YouTube i Vimeo
+  wrapEmbedWithLink("figure.wp-block-embed-youtube", "fancybox-youtube");
+  wrapEmbedWithLink("figure.wp-block-embed-vimeo", "fancybox-vimeo");
+});

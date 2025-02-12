@@ -30,14 +30,29 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
 </div>
 <!-- End Hero -->
 
+<div class="scroller">
+    <ul class="tag-list scroller_inner">
+      <?php
+      // Pobierz tytuł bieżącego projektu
+      $project_title = get_the_title();
+      $repeat_times = 5; // Ustal, ile razy ma się powtórzyć tytuł
+
+      for ( $i = 0; $i < $repeat_times; $i++ ) {
+          echo '<li>' . esc_html( $project_title ) . '</li>';
+      }
+      ?>
+    </ul>
+</div>
+
+
 <!-- Project Detail Start -->
-<div class="container mb-5 py-5 project-block">
+<div class="container section-space py-5 project-block">
   <div class="row gx-3 d-flex align-items-stretch mb-5">
     <!-- Kolumna z kartami -->
     <div class="col-12 col-lg-4">
       <div class="details-card h-100">
         <div>
-          <h4>Overview</h4>
+          <h3>Overview</h3>
           <p><?php echo $overview; ?></p>
         </div>
       </div>
@@ -45,7 +60,7 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
     <div class="col-12 col-lg-4">
       <div class="details-card h-100">
         <div>
-          <h4>Challenge</h4>
+          <h3>Challenge</h3>
           <p><?php echo $challenge; ?></p>
         </div>
       </div>
@@ -53,7 +68,7 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
     <div class="col-12 col-lg-4">
       <div class="details-card h-100">
         <div>
-          <h4>Impact &amp; Results</h4>
+          <h3>Impact &amp; Results</h3>
           <p><?php echo $impact; ?></p>
         </div>
       </div>
@@ -70,6 +85,16 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
     </div>
   </div>
 </div>
+
+<div class="container project-navigation d-flex justify-content-between mt-5" role="navigation" aria-label="Project Navigation">
+  <div class="prev-project">
+    <?php previous_post_link('%link', '<i class="fas fa-arrow-left"></i> Previous Project'); ?>
+  </div>
+  <div class="next-project">
+    <?php next_post_link('%link', 'Next Project <i class="fas fa-arrow-right"></i>'); ?>
+  </div>
+</div>
+
 
 
 <?php get_footer(); ?>

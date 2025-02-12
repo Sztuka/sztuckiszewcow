@@ -11,7 +11,7 @@ if ($contact_page):
   $contact_title   = $contact_page->post_title;
   $contact_content = apply_filters('the_content', $contact_page->post_content);
   ?>
-<div id="contact" class="contact-section container">
+<div id="contact" class="contact-section py-5 container">
   <div class="row align-items-center">
     <!-- Kolumna z obrazem (opcjonalnie) -->
     <?php if ($contact_image): ?>
@@ -21,7 +21,7 @@ if ($contact_page):
       <?php endif; ?>
       <!-- Kolumna z treścią -->
       <div class="col-md-6 contact-block">
-        <h3><?php echo esc_html($contact_title); ?></h3>
+        <h2><?php echo esc_html($contact_title); ?></h2>
         <div class="contact-card">
           <?php echo $contact_content; ?>
         </div>
@@ -35,8 +35,8 @@ if ($contact_page):
             'fallback_cb'    => false,
           ));
           ?>
+        </div>
       </div>
-    </div>
   </div>
 </div>
 <?php endif; ?>
