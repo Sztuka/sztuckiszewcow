@@ -39,16 +39,6 @@ body {
   top: 0;
 }
 
-body.admin-bar .navbar.sticky-top {
-  top: 0; /* Adjust for the height of the WordPress admin bar */
-}
-
-@media screen and (max-width: 782px) {
-  body.admin-bar .navbar.sticky-top {
-    top: 0; /* Adjust for the height of the WordPress admin bar on smaller screens */
-  }
-}
-
 h1,
 h2,
 h3,
@@ -151,11 +141,21 @@ h3 {
   }
 }
 
+.sticky-top {
+  top: 0;
+  z-index: 1020;
+}
+
 .navbar {
   background-color: var(--color-blue);
   transition: background-color 0.3s ease; /* Smooth transition for the background color change */
   z-index: 100000000;
   margin-top: 0;
+}
+
+.navbar-nav ul {
+  gap: 25px;
+  margin-bottom: 24px;
 }
 
 .navbar-nav a {
@@ -206,6 +206,11 @@ h3 {
 .social-icons-widget-area figure {
   margin: 0;
   padding: 0 14px 0;
+}
+
+.social-icons-widget-area img:hover {
+  border-radius: 8px;
+  box-shadow: var(--shadow-regular);
 }
 
 .page-banner {
@@ -271,14 +276,6 @@ h3 {
   justify-content: center; /* Wyśrodkowanie w poziomie */
   align-items: center; /* Wyśrodkowanie w pionie (opcjonalne) */
   margin: auto;
-}
-
-.sticky-top {
-  position: -webkit-sticky;
-  position: fixed;
-  top: 0;
-  z-index: 1020;
-  width: 100%;
 }
 
 /* BUTTON */
@@ -691,7 +688,7 @@ h3 {
 }
 
 /* Kontener sekcji usług */
-#services .row {
+.services-block {
   display: grid; /* Użycie CSS Grid */
   grid-template-columns: repeat(
     auto-fit,
@@ -918,14 +915,43 @@ h3 {
   padding: 0;
 }
 
+.contact-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.contact-image {
+  flex: 1 1 50%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.contact-content {
+  flex: 1 1 50%;
+}
+
+@media (max-width: 767px) {
+  .contact-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+  .contact-image,
+  .contact-content {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
+
 .contact-section img {
   opacity: 0.8;
   scale: 2;
   animation: contact-in ease-out forwards;
   animation-timeline: view();
   animation-range: 20px 320px;
-  margin-bottom: 48px;
-  max-height: 320px;
+  max-height: 360px;
 }
 
 @keyframes contact-in {
@@ -966,6 +992,8 @@ h3 {
 
 /* Social Icons Menu */
 .social-icons ul {
+  display: flex;
+  flex-direction: row;
   list-style: none;
   padding: 0;
   margin: 20px 0 0;
@@ -1013,6 +1041,10 @@ h3 {
   }
   .contact-block {
     padding: 0;
+  }
+  .social-icons ul {
+    flex-direction: column;
+    gap: 5px;
   }
 }
 

@@ -199,7 +199,7 @@ if ($about_page):
 <!-- Services Section -->
 <div id="services" class="container section-space py-5">
   <h2>Services</h2>
-  <div class="row mb-5 services-block" style="background-image: url('<?php echo esc_url( get_theme_mod( 'services_image' ) ); ?>');">
+  <div class="mb-5 services-block" style="background-image: url('<?php echo esc_url( get_theme_mod( 'services_image' ) ); ?>');">
     <?php
     $services_query = new WP_Query(array(
         'post_type' => 'service',

@@ -6,7 +6,7 @@
     <?php wp_head(); ?>
 </head>
   <body <?php body_class(); ?> data-bs-spy="scroll" data-bs-target="#navbarNav">
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-lg">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="<?php echo home_url(); ?>">
             <?php the_custom_logo(); ?>
@@ -35,8 +35,3 @@
         </div>
     </div>
 </nav>
-
-    
-
-
-`3
