@@ -17,3 +17,6 @@ require get_template_directory() . '/inc/meta-boxes.php';
 require get_template_directory() . '/inc/dashboard-counter.php';
 require get_template_directory() . '/inc/post-types.php';
 require get_template_directory() . '/inc/svg-support.php';
+
+// Ładowanie widgetów (rejestracja obszaru widgetów)
+require get_template_directory() . '/inc/widget-areas.php';

@@ -112,7 +112,7 @@ h2 {
   font-family: var(--accent-font);
   font-size: 2rem;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 700;
   line-height: normal;
   margin-bottom: 2rem;
   text-transform: uppercase;
@@ -125,11 +125,12 @@ h2::before {
   font-family: var(--accent-font);
   font-size: 2rem;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 700;
   line-height: normal;
   position: absolute;
-  left: -32px;
+  left: 0;
   top: 0;
+  transform: translateX(-110%);
 }
 
 h3 {
@@ -161,27 +162,50 @@ h3 {
   text-decoration: none;
   color: #fff;
   padding: 14px;
+  position: relative;
+  transition: color 0.3s ease;
 }
 
 .navbar-nav a:hover {
-  color: var(--color-green) !important;
+  color: var(--color-dark);
 }
 
-.navbar-nav a.active {
-  color: var(--color-green) !important;
-  font-weight: 600 !important;
+.navbar-nav a::before {
+  content: "";
+  display: block;
+  height: 0;
+  background-color: var(--color-green);
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  transition: height 0.3s ease;
+  box-shadow: var(--shadow-regular);
 }
+
+.navbar-nav a:hover::before {
+  width: 100%;
+  height: 30px;
+}
+
 /* U2FsdGVkX19jYZ!Tvj */
 .custom-logo {
   height: 50px;
   padding: 4px;
 }
 
-.social-icons .widget {
+.social-icons-widget-area {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.social-icons-widget-area figure {
+  margin: 0;
+  padding: 0 14px 0;
 }
 
 .page-banner {
@@ -1165,6 +1189,7 @@ h3 {
 video {
   width: 100% !important;
 }
+
 /*
 #fancybox-close span::after,
 #fancybox-close span::before {
@@ -1184,3 +1209,51 @@ video {
   width: 24px !important;
   height: 24px !important;
 } */
+
+.next-project a,
+.prev-project a {
+  display: flex;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--color-blue);
+  font-size: 1.5rem;
+  font-weight: 800;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.next-project a:hover,
+.prev-project a:hover {
+  color: var(--color-dark);
+}
+
+.next-project a::before,
+.prev-project a::before {
+  content: "";
+  display: block;
+  height: 13px;
+  background-color: var(--color-green);
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+.next-project a::before {
+  left: 0;
+}
+
+.prev-project a::before {
+  right: 0;
+}
+
+.next-project a:hover::before,
+.prev-project a:hover::before {
+  width: 100%;
+}
+
+.prev-project a i::before,
+.next-project a i::before {
+  position: relative;
+}
