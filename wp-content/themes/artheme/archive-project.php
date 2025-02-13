@@ -83,13 +83,13 @@ $instagram = get_theme_mod('contact_instagram');
       // Wyświetlamy nagłówek kategorii tylko, gdy są jakieś posty
       ?>
       <h2><?php echo esc_html( $category->name ); ?></h2>
-      <div class="portfolio-category">
+      <div class="portfolio-category section-space">
         <div class="portfolio-section mb-5">
           <?php
           while ( $project_query->have_posts() ) : $project_query->the_post();
             ?>
             <a href="<?php the_permalink(); ?>" class="project-link">
-              <div class="project-card">
+              <div class="project-card animate-on-scroll">
                 <?php if ( has_post_thumbnail() ) : ?>
                   <img class="project-img" 
                        src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ); ?>" 
@@ -104,7 +104,7 @@ $instagram = get_theme_mod('contact_instagram');
                   </div>
                 </div>
                 <!-- Etykieta projektu -->
-                <div class="project-label">
+                <div class="project-label animate-on-scroll">
                   <h3><?php the_title(); ?></h3>
                   <p><?php echo strip_tags( get_the_category_list(', ') ); ?></p>
                 </div>

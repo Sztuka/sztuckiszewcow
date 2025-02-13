@@ -47,7 +47,7 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
 
 <!-- Project Detail Start -->
 <div class="container section-space py-5 project-block">
-  <div class="row gx-3 d-flex align-items-stretch mb-5">
+  <div class="row g-3 d-flex align-items-stretch mb-5">
     <!-- Kolumna z kartami -->
     <div class="col-12 col-lg-4">
       <div class="details-card h-100">

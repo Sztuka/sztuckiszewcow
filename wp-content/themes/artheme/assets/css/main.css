@@ -21,7 +21,7 @@
   --shadow-regular: 8px 10px 0px 0px rgba(62, 64, 77, 0.5);
   --shadow-regular-hover: 4px 5px 10px 0px rgba(62, 64, 77, 0.2);
   --shadow-text: 1px 1px 5px rgba(0, 0, 0, 0.8);
-  --transition-box-shadow: box-shadow 0.3s;
+  --transition-box-shadow: box-shadow 0.6s;
 
   --main-font: "Inter", sans-serif;
   --accent-font: "Epilogue", sans-serif;
@@ -148,22 +148,49 @@ h3 {
 
 .navbar {
   background-color: var(--color-blue);
-  transition: background-color 0.3s ease; /* Smooth transition for the background color change */
+  transition: background-color 0.6s ease; /* Smooth transition for the background color change */
   z-index: 100000000;
   margin-top: 0;
 }
 
-.navbar-nav ul {
-  gap: 25px;
-  margin-bottom: 24px;
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  margin: 2rem 0;
+  gap: 2rem;
+}
+
+.social-icons-widget-area {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.social-icons-widget-area figure {
+  margin: 0;
+  padding: 0 14px 0;
+}
+
+.social-icons-widget-area img {
+  box-shadow: none;
+  transition: box-shadow 0.3s ease;
+  width: 300px;
+}
+
+.social-icons-widget-area img:hover {
+  border-radius: 8px;
+  box-shadow: var(--shadow-regular);
 }
 
 .navbar-nav a {
   text-decoration: none;
   color: #fff;
+  font-size: 1.5rem;
   padding: 14px;
   position: relative;
-  transition: color 0.3s ease;
+  transition: color 0.6s ease;
 }
 
 .navbar-nav a:hover {
@@ -189,28 +216,26 @@ h3 {
   height: 30px;
 }
 
+@media (min-width: 991px) {
+  .social-icons-widget-area,
+  .navbar-nav {
+    margin: 0;
+    gap: 0;
+  }
+  .navbar-collapse {
+    gap: 1rem;
+  }
+  .navbar-nav a {
+    font-size: 1.1rem;
+  }
+  .social-icons-widget-area img {
+    width: auto;
+  }
+}
 /* U2FsdGVkX19jYZ!Tvj */
 .custom-logo {
   height: 50px;
   padding: 4px;
-}
-
-.social-icons-widget-area {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-}
-
-.social-icons-widget-area figure {
-  margin: 0;
-  padding: 0 14px 0;
-}
-
-.social-icons-widget-area img:hover {
-  border-radius: 8px;
-  box-shadow: var(--shadow-regular);
 }
 
 .page-banner {
@@ -315,7 +340,7 @@ h3 {
   left: 0;
   width: 100%;
   padding: 15px 20px;
-  transition: 0.3s;
+  transition: 0.6s;
 }
 
 .btn-3 {
@@ -463,8 +488,9 @@ h3 {
 
 /* Project Card */
 .project-card {
-  scale: 0.7;
+  transform: scale(0.7);
   opacity: 0;
+
   display: flex;
   flex-direction: column;
   position: relative;
@@ -472,17 +498,26 @@ h3 {
   padding: 0;
   border-radius: 20px;
   align-items: center;
-  overflow: clip;
+  overflow: hidden;
   background: #fff;
   box-shadow: var(--shadow-regular);
-  transition: var(--transition-box-shadow);
-  animation: zoom-in ease-out forwards;
-  animation-timeline: view();
-  animation-range: 50px 400px;
+
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out,
+    box-shadow 0.6s ease;
+
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
+}
+
+.project-card.animate {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.project-card:hover {
+  box-shadow: var(--shadow-regular-hover);
 }
 
 /* Obraz projektu */
@@ -493,11 +528,7 @@ h3 {
   object-fit: cover;
   display: block;
   opacity: 1;
-  transition: scale 0.6s, opacity 0.3s;
-}
-
-.project-card:hover {
-  box-shadow: var(--shadow-regular-hover);
+  transition: scale 0.6s, opacity 0.6s;
 }
 
 /* Zmniejszenie opacity obrazu przy hoverze */
@@ -517,7 +548,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s;
+  transition: background-color 0.6s;
   z-index: 2;
   mix-blend-mode: multiply;
   opacity: 1;
@@ -537,7 +568,7 @@ h3 {
   transform: translate(-50%, -50%);
   mix-blend-mode: normal;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.6s;
   z-index: 6;
 }
 
@@ -556,18 +587,16 @@ h3 {
   border-radius: 20px;
   border: 4px solid var(--color-light);
   background: rgba(255, 255, 255, 0.9);
-  overflow: clip;
+  overflow: hidden;
   z-index: 5;
   transform: translate(0, 150px);
-  animation: slide-up ease-out forwards;
-  animation-timeline: view();
-  animation-range: 50px 400px;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  opacity: 0;
 }
 
-@keyframes slide-up {
-  to {
-    transform: translate(0, 0);
-  }
+.project-label.animate {
+  transform: translate(0, 0);
+  opacity: 1;
 }
 
 .project-label h3 {
@@ -590,21 +619,25 @@ h3 {
 }
 
 .testimonials-section h3 {
-  translate: 50px;
+  transform: translate(50px, 0);
+  opacity: 0;
   color: var(--color-blue);
   text-transform: uppercase;
   font-weight: 800;
-  animation: slide-in ease-out forwards;
-  animation-timeline: view();
-  animation-range: 50px 400px;
+  transition: transform 0.6s ease, opacity 0.6s ease;
   margin-bottom: 1rem;
+}
+
+.testimonials-section h3.animate {
+  transform: translate(0, 0);
+  opacity: 1;
 }
 
 /* Kontener dla testimonial items */
 .testimonial-block {
   position: relative;
   min-height: 210px; /* lub dostosuj według zawartości */
-  overflow: clip;
+  overflow: hidden;
 }
 
 /* Każdy testimonial-item – domyślnie ukryty */
@@ -616,7 +649,7 @@ h3 {
   width: 100%;
   opacity: 0;
   translate: 100%;
-  transition: translate 0.8s ease, opacity 0.8s ease, scale 0.8s ease;
+  transition: translate 0.6s ease, opacity 0.6s ease, scale 0.6s ease;
 }
 
 .testimonial-item p {
@@ -649,7 +682,8 @@ h3 {
 }
 
 .testimonials-me {
-  translate: 300px;
+  transform: translate(100px, 0);
+  opacity: 0;
   scale: 1.2;
   filter: grayscale(100%);
   display: block;
@@ -658,21 +692,18 @@ h3 {
   top: -64px;
   bottom: -64px;
   width: 179px;
-  /* background-color: var(--color-blue); */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right;
-  animation: slide-left ease-out forwards;
-  animation-timeline: view();
-  animation-range: 50px 400px;
+  transition: transform 0.6s ease, scale 0.6s ease, filter 0.6s ease,
+    opacity 0.6s ease;
 }
 
-@keyframes slide-left {
-  to {
-    translate: 0;
-    scale: 1;
-    filter: grayscale(0%);
-  }
+.testimonials-me.animate {
+  transform: translate(0, 0);
+  scale: 1;
+  filter: grayscale(0%);
+  opacity: 1;
 }
 
 @media (max-width: 767px) {
@@ -703,49 +734,42 @@ h3 {
 /* Styl dla pojedynczej karty */
 
 .service-card {
-  scale: 0.7;
+  transform: scale(0.7);
   opacity: 0;
+
   display: flex;
-  flex-direction: column; /* Ustawienie zawartości w kolumnie */
-  justify-content: space-between; /* Ustawienie przycisku na dole */
-  align-items: center; /* Wyśrodkowanie poziome */
-  position: relative; /* Pozycjonowanie elementów wewnętrznych */
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
   border-radius: 20px;
   border: 5px solid var(--color-light);
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: var(--shadow-regular);
-  padding: 48px; /* Odstęp wewnętrzny */
-  min-height: 300px; /* Zapewnienie minimalnej wysokości */
-  transition: var(--transition-box-shadow);
-  animation: zoom-in ease-out forwards;
-  animation-timeline: view();
-  animation-range: 50px 400px;
-  overflow: clip;
+  padding: 48px;
+  min-height: 300px;
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out,
+    box-shadow 0.6s ease;
+  overflow: hidden;
 }
 
 .service-card:hover {
   box-shadow: var(--shadow-regular-hover);
 }
 
-@keyframes zoom-in {
-  to {
-    scale: 1;
-    opacity: 1;
-  }
+.service-card.animate {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .service-card h3 {
-  translate: 50px;
+  transform: translate(50px, 0);
   color: var(--color-blue);
-  animation: slide-in ease-out forwards;
-  animation-timeline: view();
-  animation-range: 50px 400px;
+  transition: transform 0.9s ease-out;
 }
 
-@keyframes slide-in {
-  to {
-    translate: 0;
-  }
+.service-card h3.animate {
+  transform: translate(0, 0);
 }
 
 .owner-bio {
@@ -779,7 +803,7 @@ h3 {
   box-shadow: var(--shadow-regular);
   padding: 210px 48px 32px; /* Odstęp wewnętrzny */
   min-height: 300px; /* Zapewnienie minimalnej wysokości */
-  transition: var(--transition-box-shadow);
+  transition: box-shadow 0.6s;
   position: relative;
 }
 
@@ -836,22 +860,19 @@ h3 {
 
 .about-section img {
   opacity: 0.8;
-  scale: 0.5;
+  transform: scale(0.5);
   filter: grayscale(100%);
-  animation: fade-in ease-out forwards;
-  animation-timeline: view();
-  animation-range: 250px 800px;
+  transition: opacity 0.6s ease-out, transform 0.9s ease-out,
+    filter 0.6s ease-out;
   margin-bottom: 48px;
   mask: linear-gradient(180deg, #fff 5%, #fff 80%, transparent);
   -webkit-mask: linear-gradient(180deg, #fff 5%, #fff 80%, transparent);
 }
 
-@keyframes fade-in {
-  to {
-    scale: 1;
-    opacity: 1;
-    filter: grayscale(0%);
-  }
+.about-section img.animate {
+  transform: scale(1);
+  opacity: 1;
+  filter: grayscale(0%);
 }
 
 .btn .btn-icon {
@@ -946,19 +967,17 @@ h3 {
 }
 
 .contact-section img {
-  opacity: 0.8;
-  scale: 2;
-  animation: contact-in ease-out forwards;
-  animation-timeline: view();
-  animation-range: 20px 320px;
   max-height: 360px;
+  opacity: 0.8;
+  transform: scale(2);
+  filter: grayscale(100%);
+  transition: opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
 }
 
-@keyframes contact-in {
-  to {
-    scale: 1;
-    opacity: 1;
-  }
+.contact-section img.animate {
+  transform: scale(1);
+  opacity: 1;
+  filter: grayscale(0%);
 }
 
 .contact-card a {
@@ -966,7 +985,7 @@ h3 {
   color: var(--color-blue);
   font-weight: 800;
   position: relative;
-  transition: color 0.3s ease;
+  transition: color 0.6s ease;
 }
 
 .contact-card a:hover {
@@ -1075,7 +1094,7 @@ h3 {
 
 .project-banner .parallax-image {
   position: absolute;
-  top: 2%; /* Moved the image down by 10% */
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
@@ -1161,7 +1180,7 @@ h3 {
   background-color: #fff;
   box-shadow: var(--shadow-regular);
   padding: 24px;
-  transition: var(--transition-box-shadow);
+  transition: box-shadow 0.6s;
   color: #fff;
 }
 
@@ -1192,13 +1211,13 @@ h3 {
 
 @media (max-width: 991px) {
   .project-banner h1 {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 }
 
 @media (max-width: 767px) {
   .project-banner h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 }
 
@@ -1251,7 +1270,7 @@ video {
   font-size: 1.5rem;
   font-weight: 800;
   position: relative;
-  transition: color 0.3s ease;
+  transition: color 0.6s ease;
 }
 
 .next-project a:hover,
@@ -1269,7 +1288,7 @@ video {
   bottom: 0;
   z-index: -1;
   width: 0;
-  transition: width 0.3s ease;
+  transition: width 0.6s ease;
 }
 
 .next-project a::before {

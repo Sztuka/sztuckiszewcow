@@ -77,7 +77,7 @@ if ($about_page):
   <div class="row align-items-center">
     <div class="col-md-6">
       <?php if ($about_image): ?>
-        <img src="<?php echo esc_url($about_image); ?>" alt="<?php echo esc_attr($about_title); ?>" class="img-fluid rounded">
+        <img src="<?php echo esc_url($about_image); ?>" alt="<?php echo esc_attr($about_title); ?>" class="img-fluid rounded animate-on-scroll">
       <?php endif; ?>
     </div>
     <div class="col-md-6">
@@ -113,7 +113,7 @@ if ($about_page):
         while ($projects->have_posts()) : $projects->the_post();
     ?>
       <a href="<?php the_permalink(); ?>" class="project-link">
-        <div class="project-card">
+        <div class="project-card animate-on-scroll">
           <!-- Obraz projektu -->
           <?php if ( has_post_thumbnail() ) : ?>
             <img class="project-img" 
@@ -130,7 +130,7 @@ if ($about_page):
           </div>
 
           <!-- Etykieta projektu -->
-          <div class="project-label">
+          <div class="project-label animate-on-scroll">
             <h3><?php the_title(); ?></h3>
             <p><?php echo strip_tags( get_the_category_list(', ') ); ?></p>
           </div>
@@ -158,7 +158,7 @@ if ($about_page):
 <div id="testimonials" class="container-fluid testimonials-section section-space">
   <div class="container relative-testimonial py-5">
     <h2>Testimonials</h2>
-    <h3>Here's what my clients and coworkers had to say about me</h3>
+    <h3 class="animate-on-scroll">Here's what my clients and coworkers had to say about me</h3>
     <div class="testimonial-block">
       <?php
         // Zapytanie pobierające wszystkie posty typu 'quote'
@@ -188,7 +188,7 @@ if ($about_page):
     
     <!-- Obraz dekoracyjny -->
     <div 
-        class="testimonials-me" 
+        class="testimonials-me animate-on-scroll" 
         style="background-image: url('<?php echo esc_url( get_theme_mod( 'testimonial_image' ) ); ?>');">
     </div>
   </div>
@@ -210,9 +210,9 @@ if ($about_page):
         while ($services_query->have_posts()) {
             $services_query->the_post();
             ?>
-            <div class="service-card">
+            <div class="service-card animate-on-scroll">
                 <div class="owner-bio">
-                  <h3><?php the_title(); ?></h3>
+                  <h3 class="animate-on-scroll"><?php the_title(); ?></h3>
                   <p><?php the_content(); ?></p>
                 </div>
                 <div class='btn-holder'>

@@ -1,217 +1,238 @@
-document.addEventListener("DOMContentLoaded", function () {
-  var scrollSpyElement = document.body;
-  var scrollSpyOptions = {
-    target: "#navbarNav",
-    offset: 70,
-  };
+(function () {
+  "use strict";
 
-  var scrollSpyInstance = new bootstrap.ScrollSpy(
-    scrollSpyElement,
-    scrollSpyOptions
-  );
-});
+  /**
+   * Inicjalizacja wszystkich skryptów po załadowaniu DOM.
+   */
+  document.addEventListener("DOMContentLoaded", () => {
+    initScrollSpy();
+    initParallax();
+    initjQueryScripts();
+    initScrollerAnimation();
+    initCounterAnimation();
+    initScrollAnimation();
+    initTestimonials();
+    initEmbedWrapper();
+  });
 
-// Function to handle parallax scrolling
-function handleParallax() {
-  var parallaxImage = document.querySelector(".parallax-image");
-  if (parallaxImage) {
-    var scrollPosition = window.pageYOffset;
-    parallaxImage.style.transform =
-      "translateY(" + scrollPosition * 0.5 + "px)";
+  /**
+   * Inicjalizacja Bootstrap ScrollSpy.
+   */
+  function initScrollSpy() {
+    const scrollSpyOptions = {
+      target: "#navbarNav",
+      offset: 0,
+    };
+    new bootstrap.ScrollSpy(document.body, scrollSpyOptions);
   }
-}
 
-// Initialize parallax on page load
-document.addEventListener("DOMContentLoaded", function () {
-  handleParallax();
-});
+  /**
+   * Inicjalizacja efektu parallax dla elementu z klasą .parallax-image.
+   */
+  function initParallax() {
+    const parallaxImage = document.querySelector(".parallax-image");
+    if (!parallaxImage) return;
 
-// Update parallax on scroll
-document.addEventListener("scroll", function () {
-  handleParallax();
-});
+    const handleParallax = () => {
+      const scrollPosition = window.pageYOffset;
+      parallaxImage.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+    };
 
-(function ($) {
-  // Umożliwienie używania $ zamiast pisania jQuery
-  $(document).ready(function () {
-    // Inicjalizowanie skryptów po załadowaniu się całkowicie strony
-    scripts.init();
-  });
+    // Uruchomienie efektu przy załadowaniu strony i podczas scrollowania
+    handleParallax();
+    window.addEventListener("scroll", handleParallax);
+  }
 
-  const scripts = {
-    // BEGIN EDIT HERE
-    init: function () {
-      this.sticky();
-    },
+  /**
+   * Inicjalizacja skryptów opartych o jQuery (jeśli jQuery jest załadowane).
+   */
+  function initjQueryScripts() {
+    if (window.jQuery) {
+      (function ($) {
+        const scripts = {
+          init: function () {
+            this.sticky();
+            this.scrollTo();
+          },
+          consts: {
+            containers: $(".container"),
+          },
+          sticky: function () {
+            $(window).on("scroll", function () {
+              // Przykładowy kod do dodania/usuń klasy przy scrollowaniu
+              // if ($(window).scrollTop() >= someValue) {
+              //   // np. dodaj klasę 'fixed-tabs'
+              // } else {
+              //   // usuń klasę 'fixed-tabs'
+              // }
+            });
+          },
+          scrollTo: function () {
+            $(document).on("click", "", function () {
+              // Przykładowa animacja przewijania:
+              // $("html, body").animate({ scrollTop: targetPosition }, 350);
+            });
+          },
+        };
 
-    consts: {
-      containers: $(".container"),
-    },
-
-    sticky: function () {
-      $(window).scroll(function () {
-        // Przykładowy kod do ewentualnego dodania klasy przy scrollowaniu
-        // if ($(window).scrollTop() >= someValue) {
-        //     scripts.consts.fixes.addClass('fixed-tabs');
-        // } else {
-        //     scripts.consts.fixes.removeClass('fixed-tabs');
-        // }
-      });
-    },
-
-    scrollTo: function () {
-      $(document).on("click", "", function () {
-        // Przykładowa animacja przewijania:
-        // $("html, body").animate({
-        //     scrollTop: scripts.consts.buttons.position,
-        // }, 350, function () {
-        //     scripts.consts.fixes.addClass('fixed-tabs');
-        // });
-      });
-    },
-    // END EDIT HERE
-  };
-})(jQuery);
-
-const scrollers = document.querySelectorAll(".scroller");
-
-// Jeśli użytkownik nie wybrał opcji zredukowanego ruchu, dodajemy animację
-if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  addAnimation();
-}
-
-function addAnimation() {
-  scrollers.forEach((scroller) => {
-    // Dodaj atrybut data-animated="true" do każdego elementu .scroller
-    scroller.setAttribute("data-animated", true);
-
-    // Utwórz tablicę z elementów znajdujących się wewnątrz .scroller-inner
-    const scrollerInner = scroller.querySelector(".scroller_inner");
-    const scrollerContent = Array.from(scrollerInner.children);
-
-    // Dla każdego elementu w tablicy, sklonuj go,
-    // dodaj atrybut aria-hidden i wstaw do .scroller-inner
-    scrollerContent.forEach((item) => {
-      const duplicatedItem = item.cloneNode(true);
-      duplicatedItem.setAttribute("aria-hidden", true);
-      scrollerInner.appendChild(duplicatedItem);
-    });
-  });
-}
-
-// -----------------------------
-// Licznik lat doświadczenia - animacja od 0 do wartości z data-count (800ms)
-// Rozpoczyna animację, gdy element jest widoczny w określonym procencie
-// -----------------------------
-document.addEventListener("DOMContentLoaded", function () {
-  const countElem = document.querySelector("[data-count]");
-  if (!countElem) return; // Jeśli element nie istnieje, zakończ działanie
-
-  const targetCount = parseInt(countElem.getAttribute("data-count"), 10);
-  const duration = 800; // Czas trwania animacji w milisekundach (800 ms)
-  let animationStarted = false; // Flaga, aby animacja uruchomiła się tylko raz
-
-  // Ustawienie progu widoczności (zmień wartość na 0.5 lub 0.8 w zależności od potrzeb)
-  const visibilityThreshold = 0.8; // 0.5 = 50% widoczności, 0.8 = 80% widoczności itd.
-
-  // Funkcja animująca licznik
-  function animateCounter(timestamp, startTime) {
-    const elapsedTime = timestamp - startTime;
-    const progress = Math.min(elapsedTime / duration, 1); // Postęp animacji od 0 do 1
-    countElem.innerText = Math.floor(progress * targetCount);
-    if (progress < 1) {
-      requestAnimationFrame((ts) => animateCounter(ts, startTime));
-    } else {
-      countElem.innerText = targetCount; // Upewnij się, że końcowa wartość jest dokładna
+        $(function () {
+          scripts.init();
+        });
+      })(jQuery);
     }
   }
 
-  // Używamy IntersectionObserver, aby wykryć, kiedy element osiąga określony próg widoczności
-  const observer = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        // entry.intersectionRatio zwraca procent widoczności elementu (np. 0.5 oznacza 50%)
-        if (
-          entry.intersectionRatio >= visibilityThreshold &&
-          !animationStarted
-        ) {
-          animationStarted = true;
-          requestAnimationFrame(function (timestamp) {
-            animateCounter(timestamp, timestamp);
-          });
-          observer.unobserve(countElem); // Przestajemy obserwować element
+  /**
+   * Dodanie animacji dla elementów z klasą .scroller,
+   * o ile użytkownik nie wybrał opcji zredukowanego ruchu.
+   */
+  function initScrollerAnimation() {
+    const scrollers = document.querySelectorAll(".scroller");
+    if (!scrollers.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    scrollers.forEach((scroller) => {
+      scroller.setAttribute("data-animated", "true");
+
+      const scrollerInner = scroller.querySelector(".scroller_inner");
+      if (!scrollerInner) return;
+
+      // Duplikujemy każde dziecko w celu stworzenia efektu nieskończonego scrollowania
+      Array.from(scrollerInner.children).forEach((item) => {
+        const duplicate = item.cloneNode(true);
+        duplicate.setAttribute("aria-hidden", "true");
+        scrollerInner.appendChild(duplicate);
+      });
+    });
+  }
+
+  /**
+   * Animowany licznik, który zwiększa wartość od 0 do docelowej,
+   * gdy element staje się widoczny.
+   */
+  function initCounterAnimation() {
+    const countElem = document.querySelector("[data-count]");
+    if (!countElem) return;
+
+    const targetCount = parseInt(countElem.getAttribute("data-count"), 10);
+    const duration = 800; // czas trwania animacji w ms
+    let animationStarted = false;
+    const visibilityThreshold = 0.4;
+
+    const animateCounter = (timestamp, startTime) => {
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      countElem.innerText = Math.floor(progress * targetCount);
+      if (progress < 1) {
+        requestAnimationFrame((ts) => animateCounter(ts, startTime));
+      } else {
+        countElem.innerText = targetCount;
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (
+            entry.intersectionRatio >= visibilityThreshold &&
+            !animationStarted
+          ) {
+            animationStarted = true;
+            requestAnimationFrame((ts) => animateCounter(ts, ts));
+            observer.unobserve(countElem);
+          }
+        });
+      },
+      { threshold: visibilityThreshold }
+    );
+
+    observer.observe(countElem);
+  }
+
+  /**
+   * Dodaje klasę 'animate' do elementów z klasą .animate-on-scroll,
+   * gdy osiągną zadany próg widoczności.
+   */
+  function initScrollAnimation() {
+    const visibilityThreshold = 0.3;
+    const animElements = document.querySelectorAll(".animate-on-scroll");
+    if (!animElements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio >= visibilityThreshold) {
+            entry.target.classList.add("animate");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: visibilityThreshold }
+    );
+
+    animElements.forEach((el) => observer.observe(el));
+  }
+
+  /**
+   * Prosty slider dla testimoniali, zmieniający aktywny element co 5 sekund.
+   */
+  function initTestimonials() {
+    const testimonials = document.querySelectorAll(".testimonial-item");
+    if (!testimonials.length) return;
+
+    let currentIndex = 0;
+    const total = testimonials.length;
+    const intervalTime = 5000;
+
+    const showNextTestimonial = () => {
+      const current = testimonials[currentIndex];
+      current.classList.remove("active");
+      current.classList.add("slide-out-left");
+
+      // Usunięcie klasy animacyjnej po zakończeniu przejścia (0.5s)
+      setTimeout(() => {
+        current.classList.remove("slide-out-left");
+      }, 500);
+
+      currentIndex = (currentIndex + 1) % total;
+      testimonials[currentIndex].classList.add("active");
+    };
+
+    setInterval(showNextTestimonial, intervalTime);
+  }
+
+  /**
+   * Funkcja opakowująca figure z embedem w link umożliwiający odpalanie autoplay.
+   */
+  function initEmbedWrapper() {
+    /**
+     * Opakowuje każdy element pasujący do selektora figure w link,
+     * dodając do URL parametr autoplay=1.
+     *
+     * @param {string} selector - selektor elementów figure
+     * @param {string} linkClass - klasa dodawana do linku
+     */
+    function wrapEmbedWithLink(selector, linkClass) {
+      const embedFigures = document.querySelectorAll(selector);
+      embedFigures.forEach((figure) => {
+        const iframe = figure.querySelector("iframe");
+        if (!iframe) return;
+
+        let videoUrl = iframe.src;
+        videoUrl += videoUrl.includes("?") ? "&autoplay=1" : "?autoplay=1";
+
+        if (figure.parentElement.tagName.toLowerCase() !== "a") {
+          const link = document.createElement("a");
+          link.href = videoUrl;
+          link.classList.add(linkClass);
+          figure.parentNode.insertBefore(link, figure);
+          link.appendChild(figure);
         }
       });
-    },
-    {
-      threshold: visibilityThreshold, // Ustaw próg widoczności, np. 0.5 lub 0.8
     }
-  );
 
-  observer.observe(countElem);
-});
-
-// Testimonials
-document.addEventListener("DOMContentLoaded", function () {
-  const testimonials = document.querySelectorAll(".testimonial-item");
-  if (testimonials.length === 0) return;
-
-  let currentIndex = 0;
-  const total = testimonials.length;
-  const intervalTime = 5000; // 5000 ms = 5 sekund
-
-  function showNextTestimonial() {
-    const current = testimonials[currentIndex];
-    // Rozpoczynamy animację wychodzenia - dodajemy klasę slide-out-left
-    current.classList.remove("active");
-    current.classList.add("slide-out-left");
-
-    // Po zakończeniu animacji (500ms), usuń klasę slide-out-left z aktualnego elementu
-    setTimeout(() => {
-      current.classList.remove("slide-out-left");
-    }, 500); // dopasuj do czasu transition (0.5s)
-
-    // Obliczamy indeks następnego testimonial
-    currentIndex = (currentIndex + 1) % total;
-    const next = testimonials[currentIndex];
-    // Ustawiamy następny testimonial jako aktywny
-    next.classList.add("active");
+    // Opakowanie embedów YouTube i Vimeo
+    wrapEmbedWithLink("figure.wp-block-embed-youtube", "fancybox-youtube");
+    wrapEmbedWithLink("figure.wp-block-embed-vimeo", "fancybox-vimeo");
   }
-
-  setInterval(showNextTestimonial, intervalTime);
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Funkcja opakowująca element figure z embedem w link
-  function wrapEmbedWithLink(selector, linkClass) {
-    var embedFigures = document.querySelectorAll(selector);
-    embedFigures.forEach(function (figure) {
-      var iframe = figure.querySelector("iframe");
-      if (!iframe) return;
-
-      // Pobieramy URL z atrybutu src iframe
-      var videoUrl = iframe.src;
-
-      // Dodajemy parametr autoplay=1 (możesz dostosować według potrzeb)
-      if (videoUrl.indexOf("?") !== -1) {
-        videoUrl += "&autoplay=1";
-      } else {
-        videoUrl += "?autoplay=1";
-      }
-
-      // Sprawdzamy, czy figure nie jest już opakowane
-      if (figure.parentNode.tagName.toLowerCase() !== "a") {
-        var link = document.createElement("a");
-        link.href = videoUrl;
-        link.classList.add(linkClass);
-        // Wstaw link przed figure i przenieś figure do linka
-        figure.parentNode.insertBefore(link, figure);
-        link.appendChild(figure);
-      }
-    });
-  }
-
-  // Opakowujemy embedy YouTube i Vimeo
-  wrapEmbedWithLink("figure.wp-block-embed-youtube", "fancybox-youtube");
-  wrapEmbedWithLink("figure.wp-block-embed-vimeo", "fancybox-vimeo");
-});
+})();

@@ -15,10 +15,10 @@ if ($contact_page):
   <div class="container section-space contact-wrapper">
     <?php if ($contact_image): ?>
       <div class="contact-image">
-        <img src="<?php echo esc_url($contact_image); ?>" alt="<?php echo esc_attr($contact_title); ?>" class="img-fluid">
+        <img src="<?php echo esc_url($contact_image); ?>" alt="<?php echo esc_attr($contact_title); ?>" class="img-fluid animate-on-scroll">
       </div>
     <?php endif; ?>
-    
+
     <div class="contact-content">
       <h2><?php echo esc_html($contact_title); ?></h2>
       <div class="contact-card">
