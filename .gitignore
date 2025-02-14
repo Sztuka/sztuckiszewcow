@@ -1,1 +1,27 @@
+# Pliki systemowe
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Pliki i foldery używane przez IDE lub edytory
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Node.js – jeśli korzystasz z npm/yarn
+node_modules/
+
+# Composer – jeśli używasz Composera
+/vendor/
+
+# Pliki tymczasowe / cache WordPressa
+wp-content/cache/
+wp-content/upgrade/
+
+# Foldery z backupami, których nie chcesz w repozytorium
 wp-content/backups-dup-lite/
+
+# Inne pliki tymczasowe
+*.log
+*.tmp
