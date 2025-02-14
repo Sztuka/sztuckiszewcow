@@ -25,3 +25,6 @@ wp-content/backups-dup-lite/
 # Inne pliki tymczasowe
 *.log
 *.tmp
+
+
+repo-backup.bundle
