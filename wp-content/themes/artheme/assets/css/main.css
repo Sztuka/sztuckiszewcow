@@ -455,7 +455,6 @@ h3 {
   display: none;
 }
 
-/* Responsive styles for small devices */
 @media (max-width: 991px) {
   .btn-holder.l-screnn {
     display: none;
@@ -474,41 +473,37 @@ h3 {
 }
 
 /* Portfolio Section – grid layout */
-.portfolio-section {
+
+.portfolio-section,
+.featured-section {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 20px;
 }
 
-@media (max-width: 767px) {
+@media (min-width: 768px) {
   .portfolio-section {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 }
 
 /* Project Card */
 .project-card {
-  transform: scale(0.7);
-  opacity: 0;
-
+  position: relative;
   display: flex;
   flex-direction: column;
-  position: relative;
-  height: 425px;
-  padding: 0;
+  width: 100%;
   border-radius: 20px;
-  align-items: center;
-  overflow: hidden;
-  background: #fff;
   box-shadow: var(--shadow-regular);
+  cursor: pointer;
+  margin-bottom: 110px;
 
+  /* Animacja wjazdu (IntersectionObserver) */
+  transform: scale(0.7);
+  opacity: 0;
   transition: transform 0.6s ease-out, opacity 0.6s ease-out,
     box-shadow 0.6s ease;
-
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
 }
 
 .project-card.animate {
@@ -521,20 +516,31 @@ h3 {
 }
 
 /* Obraz projektu */
+
+.project-image {
+  position: relative;
+  overflow: hidden; /* Tylko tu, aby obraz nie wychodził poza kontener przy hover */
+  border-radius: 20px; /* Górne rogi zaokrąglone */
+  border: 5px solid var(--color-light);
+  background-color: #fff;
+  height: 425px; /* Możesz dostosować */
+}
+
 .project-img {
-  scale: 1;
+  transform: scale(1);
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
   opacity: 1;
-  transition: scale 0.6s, opacity 0.6s;
+  transition: transform 0.6s, opacity 0.6s;
+  overflow: hidden;
 }
 
 /* Zmniejszenie opacity obrazu przy hoverze */
 .project-card:hover .project-img {
+  transform: scale(1.2);
   opacity: 0.4;
-  scale: 1.2;
 }
 
 /* Overlay – domyślnie niewidoczny, z blend mode */
@@ -580,18 +586,28 @@ h3 {
 /* Project Label – informacyjny element w lewym górnym rogu */
 .project-label {
   position: absolute;
-  top: 20px;
+  top: 385px;
   left: 20px;
   right: 20px;
-  padding: 8px 32px 8px 16px;
+  /* height: 150px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 20px;
   border-radius: 20px;
   border: 4px solid var(--color-light);
-  background: rgba(255, 255, 255, 0.9);
+  background-color: var(--color-dark);
   overflow: hidden;
   z-index: 5;
-  transform: translate(0, 150px);
-  transition: transform 0.6s ease, opacity 0.6s ease;
+  transform: translate(0, -250px);
+  transition: transform 0.9s ease, opacity 0.6s ease;
   opacity: 0;
+}
+
+.featured-section .project-label {
+  height: fit-content;
+  justify-content: flex-start;
 }
 
 .project-label.animate {
@@ -600,11 +616,31 @@ h3 {
 }
 
 .project-label h3 {
-  color: var(--color-blue);
+  color: var(--color-green);
   margin: 0;
 }
 
+.project-label .cat::before {
+  position: absolute;
+  left: 0px;
+  content: "#";
+  display: inline-block;
+  color: var(--color-blue);
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.project-label .cat {
+  position: relative;
+  padding-left: 20px;
+  color: #fff;
+  font-size: 1.3rem;
+  margin: 0;
+  font-weight: 700;
+}
+
 .project-label p {
+  color: #fff;
   margin: 0;
 }
 

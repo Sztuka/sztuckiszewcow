@@ -99,14 +99,20 @@ if ($about_page):
 
 <!-- Portfolio Section -->
 <div id="portfolio" class="container section-space py-5">
-  <h2>Portfolio</h2>  
-  <!-- Portfolio Grid -->
-  <div class="portfolio-section mb-5">
+  <h2>Case Studies</h2>
+  <div class="featured-section mp-5 pb-5">
     <?php
-      // Zapytanie pobierające maksymalnie 8 postów typu 'project'
+      // Zapytanie pobierające maksymalnie 4 postów typu 'project', które są oznaczone jako featured
       $args = array(
         'post_type'      => 'project',
-        'posts_per_page' => 8,
+        'posts_per_page' => 4,
+        'meta_query'     => array(
+          array(
+            'key'     => '_artzy_featured',
+            'value'   => '1',
+            'compare' => '=',
+          )
+        ),
       );
       $projects = new WP_Query($args);
       if ($projects->have_posts()) :
@@ -114,22 +120,80 @@ if ($about_page):
     ?>
       <a href="<?php the_permalink(); ?>" class="project-link">
         <div class="project-card animate-on-scroll">
-          <!-- Obraz projektu -->
-          <?php if ( has_post_thumbnail() ) : ?>
-            <img class="project-img" 
-              src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ); ?>" 
-              alt="<?php echo esc_attr( wp_strip_all_tags( get_the_excerpt() ) ); ?>">
-          <?php endif; ?>
-          <!-- Overlay, który pojawia się na hover -->
-          <div class="overlay">
-          </div>
-          <div class='btn-holder'>
-            <div class="btn btn-dark-3 dark-hover-border-2">
-              <span>Open Project</span>
+          <!-- Kontener z obrazem i efektem hover -->
+          <div class="project-image">
+            <?php if ( has_post_thumbnail() ) : ?>
+              <img class="project-img"
+                  src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ); ?>"
+                  alt="<?php echo esc_attr( wp_strip_all_tags( get_the_excerpt() ) ); ?>">
+            <?php endif; ?>
+            <!-- Overlay z przyciskiem -->
+            <div class="overlay"></div>
+            <div class="btn-holder">
+              <div class="btn btn-dark-3 dark-hover-border-2">
+                <span>Open Project</span>
+              </div>
             </div>
           </div>
-
-          <!-- Etykieta projektu -->
+          <!-- Etykieta projektu (label) -->
+          <div class="project-label animate-on-scroll">
+            <h3><?php the_title(); ?></h3>
+            <p class="cat"><?php echo strip_tags( get_the_category_list(', ') ); ?></p>
+            <?php the_excerpt(); ?>
+          </div>
+        </div>
+      </a>
+      <?php
+        endwhile;
+        wp_reset_postdata();
+      else :
+        echo '<p>No projects found.</p>';
+      endif;
+    ?>
+  </div>
+  <h2>Other Projects</h2>  
+  <!-- Portfolio Grid -->
+  <div class="portfolio-section mb-5">
+    <?php
+      // Zapytanie pobierające maksymalnie 8 postów typu 'project', które nie są oznaczone jako featured
+      $args = array(
+        'post_type'      => 'project',
+        'posts_per_page' => 8,
+        'meta_query'     => array(
+          'relation' => 'OR',
+          array(
+            'key'     => '_artzy_featured',
+            'value'   => '1',
+            'compare' => '!=',
+          ),
+          array(
+            'key'     => '_artzy_featured',
+            'compare' => 'NOT EXISTS',
+          )
+        ),
+      );
+      $projects = new WP_Query($args);
+      if ($projects->have_posts()) :
+        while ($projects->have_posts()) : $projects->the_post();
+    ?>
+      <a href="<?php the_permalink(); ?>" class="project-link">
+        <div class="project-card animate-on-scroll">
+          <!-- Kontener z obrazem i efektem hover -->
+          <div class="project-image">
+            <?php if ( has_post_thumbnail() ) : ?>
+              <img class="project-img"
+                  src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ); ?>"
+                  alt="<?php echo esc_attr( wp_strip_all_tags( get_the_excerpt() ) ); ?>">
+            <?php endif; ?>
+            <!-- Overlay z przyciskiem -->
+            <div class="overlay"></div>
+            <div class="btn-holder">
+              <div class="btn btn-dark-3 dark-hover-border-2">
+                <span>Open Project</span>
+              </div>
+            </div>
+          </div>
+          <!-- Etykieta projektu (label) -->
           <div class="project-label animate-on-scroll">
             <h3><?php the_title(); ?></h3>
             <p><?php echo strip_tags( get_the_category_list(', ') ); ?></p>
@@ -147,12 +211,13 @@ if ($about_page):
   <!-- See More Button – zachowujemy klasy Bootstrapa -->
   <div class="row">
     <div class="btn-holder mx-auto">
-      <a href="<?php echo esc_url( get_post_type_archive_link('project') ); ?>" class="btn btn-dark-3 dark-hover-border-2 mx-auto">
+      <a href="<?php echo esc_url(get_post_type_archive_link('project')); ?>" class="btn btn-dark-3 dark-hover-border-2 mx-auto">
         <span>See More</span>
       </a>
     </div>
   </div>   
 </div>
+
 
 <!-- Testimonials Section -->
 <div id="testimonials" class="container-fluid testimonials-section section-space">

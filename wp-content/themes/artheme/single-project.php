@@ -3,11 +3,6 @@ get_header();
 
 // Pobierz dane kontaktowe (z Customizera)
 $email = get_theme_mod('contact_email');
-
-// Pobierz dane projektu zapisane w meta (z meta boxów)
-$overview  = get_post_meta( get_the_ID(), 'overview', true );
-$challenge = get_post_meta( get_the_ID(), 'challenge', true );
-$impact    = get_post_meta( get_the_ID(), 'impact', true );
 ?>
 
 <!-- Start Hero -->
@@ -44,39 +39,8 @@ $impact    = get_post_meta( get_the_ID(), 'impact', true );
     </ul>
 </div>
 
-
 <!-- Project Detail Start -->
 <div class="container section-space py-5 project-block">
-  <div class="row g-3 d-flex align-items-stretch mb-5">
-    <!-- Kolumna z kartami -->
-    <div class="col-12 col-lg-4">
-      <div class="details-card h-100">
-        <div>
-          <h3>Overview</h3>
-          <p><?php echo $overview; ?></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-lg-4">
-      <div class="details-card h-100">
-        <div>
-          <h3>Challenge</h3>
-          <p><?php echo $challenge; ?></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-lg-4">
-      <div class="details-card h-100">
-        <div>
-          <h3>Impact &amp; Results</h3>
-          <p><?php echo $impact; ?></p>
-        </div>
-      </div>
-    </div>
-    <!-- Koniec wiersza z kartami -->
-  </div>
-  
-  <!-- Kolumna z treścią -->
   <div class="row">
     <div class="col-12">
       <div class="content">
