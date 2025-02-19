@@ -1,5 +1,4 @@
 <?php
-
 get_header();
 
 $email     = get_theme_mod('contact_email');
@@ -8,7 +7,6 @@ $whatsapp  = get_theme_mod('contact_whatsapp');
 $messenger = get_theme_mod('contact_messenger');
 $linkedin  = get_theme_mod('contact_linkedin');
 $instagram = get_theme_mod('contact_instagram');
-
 ?>
 
 <div id="home" class="container-fluid page-banner">
@@ -26,7 +24,6 @@ $instagram = get_theme_mod('contact_instagram');
     </div>  
   </div>
 </div>
-
 
 <div class="scroller section-space">
     <ul class="tag-list scroller_inner">
@@ -55,10 +52,6 @@ $instagram = get_theme_mod('contact_instagram');
       ?>
     </ul>
 </div>
-
-
-
-
 
 <!-- About Me Section -->
 <?php
@@ -95,12 +88,10 @@ if ($about_page):
 </div>
 <?php endif; ?>
 
-
-
 <!-- Portfolio Section -->
 <div id="portfolio" class="container section-space py-5">
   <h2>Case Studies</h2>
-  <div class="featured-section mp-5 pb-5">
+  <div class="featured-section section-space">
     <?php
       // Zapytanie pobierające maksymalnie 4 postów typu 'project', które są oznaczone jako featured
       $args = array(
@@ -137,9 +128,25 @@ if ($about_page):
           </div>
           <!-- Etykieta projektu (label) -->
           <div class="project-label animate-on-scroll">
-            <h3><?php the_title(); ?></h3>
-            <p class="cat"><?php echo strip_tags( get_the_category_list(', ') ); ?></p>
-            <?php the_excerpt(); ?>
+            <div class="flex-column g-5">
+
+              <h3><?php the_title(); ?></h3>
+              <p class="cat"><?php echo strip_tags( get_the_category_list(', ') ); ?></p>
+              <p>
+                
+                <?php
+            $raw_excerpt = get_the_excerpt();
+            $custom_excerpt = wp_trim_words( $raw_excerpt, 32, '(...)' ); // 20 słów, końcówka '...'
+            echo $custom_excerpt;
+            ?>
+              </p>
+            </div>
+            <div class="btn-holder mx-auto">
+              <div class="btn btn-dark-3 dark-hover-border-2">
+                <span>Open Project</span>
+              </div>
+            </div>
+
           </div>
         </div>
       </a>
@@ -196,7 +203,7 @@ if ($about_page):
           <!-- Etykieta projektu (label) -->
           <div class="project-label animate-on-scroll">
             <h3><?php the_title(); ?></h3>
-            <p><?php echo strip_tags( get_the_category_list(', ') ); ?></p>
+            <p class="cat"><?php echo strip_tags( get_the_category_list(', ') ); ?></p>
           </div>
         </div>
       </a>
@@ -217,7 +224,6 @@ if ($about_page):
     </div>
   </div>   
 </div>
-
 
 <!-- Testimonials Section -->
 <div id="testimonials" class="container-fluid testimonials-section section-space">
@@ -259,8 +265,6 @@ if ($about_page):
   </div>
 </div>
 
-
-
 <!-- Services Section -->
 <div id="services" class="container section-space py-5">
   <h2>Services</h2>
@@ -293,7 +297,5 @@ if ($about_page):
     ?>
   </div>
 </div>
-
-
 
 <?php get_footer(); ?>
