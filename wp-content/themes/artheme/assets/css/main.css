@@ -657,6 +657,10 @@ h3 {
   }
 }
 
+.category-label {
+  min-height: 106px !important;
+}
+
 /* Testimonials */
 .testimonials-section {
   background: var(--color-green);

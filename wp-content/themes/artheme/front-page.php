@@ -219,7 +219,7 @@ if ($about_page):
   <div class="row">
     <div class="btn-holder mx-auto">
       <a href="<?php echo esc_url(get_post_type_archive_link('project')); ?>" class="btn btn-dark-3 dark-hover-border-2 mx-auto">
-        <span>See More</span>
+        <span>All Projects</span>
       </a>
     </div>
   </div>   
