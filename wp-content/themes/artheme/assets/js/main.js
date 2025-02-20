@@ -13,7 +13,22 @@
     initScrollAnimation();
     initTestimonials();
     initEmbedWrapper();
+    initHamburger();
   });
+
+  /**
+   * Inicjalizacja hamburgera w nagłówku - animacja przełączająca ikonę w "X".
+   */
+  function initHamburger() {
+    const hamburger = document.getElementById("hamburger");
+    if (hamburger) {
+      hamburger.addEventListener("click", function () {
+        this.classList.toggle("active");
+        // Opcjonalnie:
+        // document.getElementById('mobile-menu').classList.toggle('open');
+      });
+    }
+  }
 
   /**
    * Inicjalizacja Bootstrap ScrollSpy.

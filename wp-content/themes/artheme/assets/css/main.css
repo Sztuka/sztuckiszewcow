@@ -1361,3 +1361,31 @@ video {
 .next-project a i::before {
   position: relative;
 }
+
+.navbar-toggler.hamburger {
+  border: none;
+  background: transparent;
+  padding: 0.25rem 0.75rem;
+}
+
+.navbar-toggler.hamburger .hamburger-line {
+  display: block;
+  width: 30px;
+  height: 3px;
+  margin: 4px 0;
+  background-color: #fff; /* lub inny kolor, dopasowany do navbar-dark */
+  transition: all 0.3s ease;
+}
+
+/* Animacja do "X" po aktywacji */
+.navbar-toggler.hamburger.active .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-toggler.hamburger.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggler.hamburger.active .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
