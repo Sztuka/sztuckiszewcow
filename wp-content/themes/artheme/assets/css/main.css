@@ -1444,6 +1444,11 @@ video {
   transform: translateX(-90vw);
 }
 
+.navbar-collapse .custom-logo-link,
+.navbar-collapse h2 {
+  display: none;
+}
+
 /* Responsive Styles */
 @media (max-width: 991px) {
   .custom-ligo-link {
@@ -1471,18 +1476,20 @@ video {
     padding: 0;
   }
   .navbar-collapse .custom-logo-link {
+    display: block;
     margin-bottom: 2rem;
   }
   .navbar-collapse .custom-logo {
     height: 80px;
+    color
   }
   .navbar-collapse h2 {
-    color: var(--color-light);
+    display: block;
+    color: var(--color-green);
     margin: 0;
   }
   .navbar-nav a {
     text-transform: uppercase;
-    font-weight: 800;
   }
 }
 
