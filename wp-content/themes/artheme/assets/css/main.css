@@ -156,9 +156,9 @@ h3 {
 .navbar-nav {
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   margin: 2rem 0;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .social-icons-widget-area {
@@ -476,9 +476,10 @@ h3 {
 
 .portfolio-section,
 .featured-section {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 40px 20px;
 }
 
 /* Project Card */
@@ -576,7 +577,6 @@ h3 {
 /* Project Label – informacyjny element w lewym górnym rogu */
 .project-label {
   min-height: 146px;
-  max-height: 385px;
   background: var(--color-dark);
   border-radius: 20px;
   border: 4px solid var(--color-light);
@@ -628,6 +628,37 @@ h3 {
   margin: 0;
 }
 
+.featured-section .project-label div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.featured-section.btn-holder {
+  padding: 10px 0 0;
+}
+
+.featured-section::after,
+.portfolio-section::after {
+  position: absolute;
+  content: "";
+  top: -20px;
+  right: -40px;
+  bottom: -30px;
+  width: 120px;
+  border-radius: 20px;
+}
+
+.featured-section::after {
+  background: var(--color-green);
+}
+
+.portfolio-section::after {
+  left: -40px;
+  right: unset;
+  background: var(--color-light);
+}
+
 @media (min-width: 992px) {
   .portfolio-section {
     grid-template-columns: repeat(2, 1fr);
@@ -641,7 +672,8 @@ h3 {
     width: 50%;
   }
   .featured-section .project-label {
-    width: calc(50% + 40px);
+    max-height: 385px;
+    width: calc(50% - 40px);
     margin: 20px 0 20px -40px;
     height: 100%;
     justify-content: space-between;
@@ -650,10 +682,9 @@ h3 {
     justify-self: flex-end;
     margin-bottom: 10px;
   }
-  .featured-section .project-label div {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  .featured-section::after,
+  .portfolio-section::after {
+    width: 150px;
   }
 }
 
@@ -1362,30 +1393,113 @@ video {
   position: relative;
 }
 
+/* Navbar & Mobile Menu Styles */
 .navbar-toggler.hamburger {
   border: none;
   background: transparent;
-  padding: 0.25rem 0.75rem;
+  padding: 0.25rem;
+  z-index: 1050;
+  position: relative;
 }
 
-.navbar-toggler.hamburger .hamburger-line {
+.hamburger-line {
   display: block;
   width: 30px;
   height: 3px;
   margin: 4px 0;
-  background-color: #fff; /* lub inny kolor, dopasowany do navbar-dark */
+  background-color: #fff;
   transition: all 0.3s ease;
 }
 
-/* Animacja do "X" po aktywacji */
-.navbar-toggler.hamburger.active .hamburger-line:nth-child(1) {
+/* Hamburger Animation */
+.hamburger.active .hamburger-line:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
 
-.navbar-toggler.hamburger.active .hamburger-line:nth-child(2) {
+.hamburger.active .hamburger-line:nth-child(2) {
   opacity: 0;
 }
 
-.navbar-toggler.hamburger.active .hamburger-line:nth-child(3) {
+.hamburger.active .hamburger-line:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile Menu */
+.navbar-collapse {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: -90vw;
+  width: 90vw;
+  height: 100dvh;
+  background-color: var(--color-blue);
+  padding-top: 80px;
+  transition: transform 0.9s ease-in-out;
+  z-index: 1040;
+}
+
+.navbar-collapse.show {
+  transform: translateX(-90vw);
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+  .custom-ligo-link {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    margin-bottom: auto;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: 2rem;
+    gap: 1.5rem;
+  }
+
+  .navbar-collapse {
+    padding: 8px;
+  }
+
+  .social-icons-widget-area {
+    margin-top: auto;
+    padding: 0;
+  }
+  .navbar-collapse .custom-logo-link {
+    margin-bottom: 2rem;
+  }
+  .navbar-collapse .custom-logo {
+    height: 80px;
+  }
+  .navbar-collapse h2 {
+    color: var(--color-light);
+    margin: 0;
+  }
+  .navbar-nav a {
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 992px) {
+  .navbar-collapse {
+    position: static;
+    height: auto;
+    background: none;
+    transform: none;
+    padding: 0;
+    width: auto;
+    display: flex !important;
+    flex-direction: row;
+  }
+
+  .navbar-toggler.hamburger {
+    display: none;
+  }
 }

@@ -21,11 +21,21 @@
    */
   function initHamburger() {
     const hamburger = document.getElementById("hamburger");
-    if (hamburger) {
+    const menu = document.getElementById("navbarNav");
+
+    if (hamburger && menu) {
       hamburger.addEventListener("click", function () {
         this.classList.toggle("active");
-        // Opcjonalnie:
-        // document.getElementById('mobile-menu').classList.toggle('open');
+        menu.classList.toggle("show");
+      });
+
+      // Zamykanie menu po kliknięciu w link
+      const menuLinks = menu.getElementsByTagName("a");
+      Array.from(menuLinks).forEach((link) => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("active");
+          menu.classList.remove("show");
+        });
       });
     }
   }

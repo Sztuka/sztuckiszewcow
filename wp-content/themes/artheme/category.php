@@ -32,10 +32,13 @@
 <div class="scroller section-space">
   <ul class="tag-list scroller_inner">
     <?php
-      for ( $i = 0; $i < 20; $i++ ) {
-        echo '<li>' . esc_html( $cat_slug ) . '</li>';
-      }
-    ?>
+        // Pobierz nazwę bieżącej kategorii przy pomocy single_cat_title()
+        $category_name = single_cat_title("", false);
+        // Powtórz nazwę kategorii 20 razy – możesz dostosować liczbę iteracji
+        for ( $i = 0; $i < 20; $i++ ) {
+          echo '<li>' . esc_html( $category_name ) . '</li>';
+        }
+      ?>
   </ul>
 </div>
 

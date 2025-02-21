@@ -52,6 +52,7 @@ $cat_slug = $current_cat->slug;
   <!-- Featured Projects: Case Studies -->
   <h2>Case Studies</h2>
   <div class="featured-section section-space">
+    
     <?php
       $featured_args = array(
         'post_type'      => 'project',

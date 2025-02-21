@@ -89,7 +89,7 @@ if ($about_page):
 <?php endif; ?>
 
 <!-- Portfolio Section -->
-<div id="portfolio" class="container section-space py-5">
+<div id="case-studies" class="container section-space py-5">
   <h2>Case Studies</h2>
   <div class="featured-section section-space">
     <?php
@@ -140,11 +140,6 @@ if ($about_page):
             echo $custom_excerpt;
             ?>
               </p>
-            </div>
-            <div class="btn-holder mx-auto">
-              <div class="btn btn-dark-3 dark-hover-border-2">
-                <span>Open Project</span>
-              </div>
             </div>
 
           </div>
