@@ -27,6 +27,7 @@
       hamburger.addEventListener("click", function () {
         this.classList.toggle("active");
         menu.classList.toggle("show");
+        document.body.classList.toggle("no-scroll"); // Toggle no-scroll class
       });
 
       // Zamykanie menu po kliknięciu w link
@@ -35,6 +36,7 @@
         link.addEventListener("click", () => {
           hamburger.classList.remove("active");
           menu.classList.remove("show");
+          document.body.classList.remove("no-scroll"); // Remove no-scroll class
         });
       });
     }
